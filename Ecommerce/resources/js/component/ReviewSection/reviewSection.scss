@@ -1,0 +1,110 @@
+@import "../../scss/_variables.scss";
+
+.section-book-review {
+    margin-top: 20px;
+    .row {
+        .col-12.col-sm-8 {
+            .customer-review {
+                position: relative;
+                background: white;
+                padding: 20px;
+                box-shadow: $box-shadow;
+                border-radius: $border-radius;
+                .title {
+                    font-weight: 600;
+                    .sub-title {
+                        margin-left: 10px;
+                        color: black;
+                        font-size: 1rem;
+                        font-weight: 500;
+                    }
+                }
+                .data-star {
+                    .star-average {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        font-weight: 900;
+                        font-size: 30px;
+                        color: #ffc300;
+                    }
+                    .all-star {
+                        display: flex;
+                        flex-direction: row-reverse;
+                        justify-content: flex-end;
+                        gap: 10px;
+                        span.star {
+                            cursor: pointer;
+                            &.active {
+                                text-decoration: underline;
+                                color: $secondary-color;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+                .utilities {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .showing-review {
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .button-group {
+                        .sort {
+                        }
+                        .show {
+                        }
+                    }
+                }
+                .comment-review {
+                    list-style: none;
+                    margin: 20px 0 0;
+                    padding: 0;
+
+                    .comment-review-item {
+                        border-bottom: 1px solid $primary-color;
+                        margin-bottom: 20px;
+                        .comment-review-title {
+                            font-weight: 600;
+                            span{
+                                font-size: 1.2rem;
+                                font-weight: 500;
+                            }
+                        }
+                        .comment-review-content {
+                            border-left: 5px solid $secondary-color;
+                            padding-left: 20px;
+                            text-transform: capitalize;
+                            text-indent: 30px;
+                            line-height: 2;
+                        }
+                        .comment-review-time {
+                            display: flex;
+                            justify-content: flex-end;
+                        }
+                    }
+                }
+                .paginate {
+                    margin-top: 20px;
+                }
+            }
+        }
+        .col-12.col-sm-4 {
+            .write-review {
+                background: white;
+                border-radius: $border-radius;
+                padding: 20px;
+                box-shadow: $box-shadow;
+
+                .title {
+                }
+                form.form-review {
+                    .submit-review {
+                    }
+                }
+            }
+        }
+    }
+}

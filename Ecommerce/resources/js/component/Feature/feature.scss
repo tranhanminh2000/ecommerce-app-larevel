@@ -1,0 +1,11 @@
+@import "../../scss/_variables.scss";
+
+.products-list {
+    width: 90%;
+    margin: auto;
+    .row {
+        .product-list-item {
+            margin-top: 10px;
+        }
+    }
+}

@@ -1,0 +1,87 @@
+@import "../../scss/_variables.scss";
+
+.card.bwm-card {
+    coloR: black;
+    text-decoration: none;
+    margin-top: 10px;
+    height: 450px;
+    overflow: hidden;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px ;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover{
+        transform: scale(105%);
+    }
+    .wrapper-img {
+        width: 100%;
+        height: 250px;
+        display: block;
+        overflow: hidden;
+        img {
+            transition: all 0.5s ease;
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .card-body-head {
+            .card-title {
+                text-align: center;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                max-height: 3.2rem;
+                font-size: 1rem;
+                transition: all 0.5s ease;
+
+            }
+            .card-text {
+                font-weight: 600;
+                text-align: center;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+                max-height: 6.2rem;
+            }
+        }
+        .card-body-foot {
+            .price {
+                border-top: 1px solid #aaa;
+                text-align: center;
+                .current {
+                    font-size: 1.2rem;
+                    margin-right: 10px;
+                }
+                .discount {
+                    font-size: 1.5rem;
+                    color: $primary-color;
+                }
+            }
+            .button-group {
+                .detail {
+                    background: $secondary-color;
+                    border: none;
+                }
+            }
+        }
+    }
+
+    &:hover {
+
+        .card-title {
+            color: $primary-color;
+        }
+    }
+}
+

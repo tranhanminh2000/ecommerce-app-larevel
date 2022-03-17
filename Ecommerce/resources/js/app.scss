@@ -1,0 +1,11 @@
+@import "./scss/variables";
+
+.app {
+  font-family: $font-family;
+  background-color: $grey-light;
+}
+
+.bwm-line-through{
+    text-decoration: line-through;
+}
+

@@ -1,0 +1,17 @@
+@import "../../scss/_variables.scss";
+
+.btn-register-now {
+    width: 100%;
+    border: none;
+    background: $primary-color;
+    font-weight: 700;
+}
+
+.name-group {
+    display: flex;
+    gap: 10px;
+    .f-Name {
+    }
+    .l-Name {
+    }
+}

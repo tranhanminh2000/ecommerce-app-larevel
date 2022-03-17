@@ -1,0 +1,46 @@
+@import "../../scss/variables";
+.cart {
+    .container {
+        .cart-title {
+            padding: 10px 0 10px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid $primary-color;
+        }
+        .row {
+            .col-12.col-md-8 {
+
+            }
+            .col-12.col-md-4 {
+                .total {
+                    background: white;
+                    border-radius: $border-radius;
+                    border: 1px solid #999;
+
+                    .total-title {
+                        text-align: center;
+                        font-weight: 700;
+                        padding: 10px;
+                        border-bottom: 1px solid #999;
+                    }
+                    .total-content {
+                        .price {
+                            text-align: center;
+                            padding: 30px;
+                            font-size: 2rem;
+                            font-weight: 500;
+                        }
+                        .btn.order {
+                            display: block;
+                            width: 300px;
+                            background: $primary-color;
+                            margin: auto;
+                            margin-bottom: 20px;
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+@import "../../scss/variables";
+
+.home {
+    .container.on-sale {
+        .on-sale-header {
+            margin: 10px 0 10px;
+            display: flex;
+            justify-content: space-between;
+            .title {
+            }
+            .view-all {
+                text-decoration: underline;
+                color: $secondary-color;
+            }
+        }
+        .on-sale-content {
+            overflow: hidden;
+            .slider {
+                padding: 30px 0 30px;
+                background-color: #ffffff;
+            }
+        }
+    }
+    .container.feature {
+        margin-top: 20px;
+        .feature-header {
+            margin-bottom: 20px;
+            .title {
+                text-align: center;
+            }
+            .options {
+                text-align: center;
+                .btn.recommend.active {
+                    background: $primary-color;
+                    color: white;
+                    font-weight: 500;
+                }
+                .btn.popular.active {
+                    background: $secondary-color;
+                    color: white;
+                    font-weight: 500;
+                }
+            }
+        }
+        .feature-content {
+            background: white;
+        }
+    }
+}

@@ -1,0 +1,60 @@
+@import "../../scss/_variables.scss";
+
+.about {
+  .container {
+    .wrapper {
+    }
+    .header {
+      margin-bottom: 20px;
+      margin-top: 20px;
+      background: white;
+      padding: 10px;
+     
+    }
+    .main {
+      background: #ffffff;
+      padding: 20px 0px 20px;
+      .title {
+        margin-bottom: 10px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .content {
+        .container.section-1 {
+          margin: auto;
+          max-width: 700px;
+          .section-1-title {
+            text-align: center;
+            margin: 20px;
+            .hight-light {
+              color: $primary-color;
+            }
+          }
+          .section-1-content {
+          }
+        }
+
+        .container.section-2 {
+          margin: auto;
+          max-width: 700px;
+          .row {
+            .col-sm-6 {
+              .section-2-title {
+                margin-bottom: 20px;
+              }
+              .section-2-content {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+hr.cross-line {
+  margin: 0px auto 0px;
+  width: 70px;
+  border-top: 2px solid $secondary-color;
+  opacity: 1;
+}

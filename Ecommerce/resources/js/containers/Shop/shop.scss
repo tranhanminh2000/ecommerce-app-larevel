@@ -1,0 +1,77 @@
+@import "../../scss/variables";
+
+.shop {
+    .section-main {
+        .container {
+            .wrapper {
+                .title {
+                    margin-bottom: 20px;
+                    text-transform: uppercase;
+                    .filter-title{
+                        color: #999;
+                        font-size: 1rem;
+                        margin-left: 20px;
+                        text-transform: capitalize;
+                        font-style: italic;
+                    }
+                }
+            }
+            .row {
+                background: white;
+                .filter-section {
+                    .filter-heading {
+                        height: 50px;
+                        background: $primary-color;
+                        padding: 10px;
+                        border-radius: $border-radius;
+                        margin-bottom: 20px;
+                        color: white;
+                    }
+                }
+
+                .books-section {
+                    .utilities-bar {
+                        display: flex;
+                        height: 50px;
+                        justify-content: space-between;
+                        background: white;
+                        border-radius: $border-radius;
+                        padding: 10px 0 10px;
+                        align-items: center;
+                        p {
+                            line-height: 100%;
+                            margin: 0;
+                        }
+                        .button-group {
+                            display: flex;
+                            .dropdown {
+                                .dropdown-toggle {
+                                }
+                                .dropdown-menu {
+                                }
+                            }
+                        }
+                    }
+
+                    .product-list {
+                        .product-list-item {
+                            margin-top: 20px;
+                        }
+                    }
+
+                    .row.pagination {
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .filterQuery {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

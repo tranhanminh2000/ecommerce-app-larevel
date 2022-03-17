@@ -1,0 +1,17 @@
+.object-fit-cover {
+  object-fit: cover;
+}
+.mt-10 {
+  margin-top: 20px !important;
+}
+.mg-auto {
+  margin: auto;
+}
+
+.over-flow-hidden {
+  overflow: hidden;
+}
+
+.float-right {
+  float: right;
+}

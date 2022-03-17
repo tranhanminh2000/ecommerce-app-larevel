@@ -1,0 +1,44 @@
+@import "../../scss/_variables.scss";
+
+.accordion{
+    margin-bottom: 10px;
+    .accordion-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .accordion-list-item {
+            margin-bottom: 5px;
+            cursor: pointer;
+            font-weight: 0;
+            transition: padding 0.5s ease;
+            transition-property: padding, font-weight;
+            padding-left: 0px;
+            border-bottom: 1px solid #999;
+            &:hover {
+                color: $primary-color;
+            }
+            &.active {
+                font-weight: bold;
+                color: $secondary-color;
+                border-left: 3px solid $primary-color;
+                padding-left: 5px;
+            }
+            &.luminesce {
+                color: $yellow-dark;
+            }
+        }
+    }
+}
+
+
+.accordion-button:not(.collapsed) {
+    color: unset !important;
+    background-color: unset !important;
+    text-transform: capitalize !important;
+
+}
+
+.accordion-button.collapsed {
+    text-transform: capitalize !important;
+}

@@ -1,0 +1,102 @@
+@import "../../scss/variables";
+
+.bwm-header {
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-bottom: 3px solid $primary-color;
+    .navbar {
+        box-shadow: $box-shadow;
+        .container {
+            .collapse {
+                position: relative;
+                justify-content: space-between;
+                .navbar-brand.logo {
+                    display: flex;
+                    .image-wrapper {
+                        display: inline-block;
+                        height: 50px;
+                        width: 150px;
+                        img {
+                            height: 100%;
+                            width: 100%;
+                            object-fit: contain;
+                        }
+                    }
+                    .logo-text {
+                        display: inline-block;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-weight: 500;
+                        color: $primary-color;
+                        .worm {
+                            color: $secondary-color;
+                            font-weight: 500;
+                        }
+                    }
+                }
+
+                .navbar-nav {
+                    .nav-item {
+                        .nav-link {
+                            text-align: center;
+                            margin-right: 10px;
+                            padding: 10px 15px;
+                            text-align: center;
+                            position: relative;
+                            transition: all 0.5s ease !important;
+                            display: flex;
+                            gap: 5px;
+                            &:hover {
+                                background: $primary-color;
+                                color: white;
+                                border-radius: 5px;
+                            }
+
+                            &.active {
+                                background: $primary-color;
+                                color: white;
+                                border-radius: 5px;
+                            }
+                        }
+                    }
+                }
+
+                .logIn {
+                    font-weight: 800;
+                    display: inline-block;
+                    padding: 5px 20px 5px;
+                    border-radius: 30px;
+                    background: white;
+                    border: 1px solid $primary-color;
+                    cursor: pointer;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    color: $primary-color;
+
+                    &:hover {
+                        color: white;
+                        background-color: $primary-color;
+                    }
+                }
+
+                .loggedIn {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    button#userConfig{
+                        padding: 0 5px 0!important;
+                    }
+                    .dropdown-menu[data-bs-popper]{
+                        top: 100%!important;
+                        right: 0!important;
+                        left: unset!important;
+                    }
+                }
+            }
+        }
+    }
+}
