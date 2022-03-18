@@ -1,0 +1,30 @@
+$primary-color: #951b1b;
+$secondary-color: #202124;
+$white: #ffffff;
+$white-smoke: #aaaaaa;
+
+// Background color
+.bg-primary-color {
+    background: $primary-color !important;
+}
+
+.bg-secondary-color {
+    background: $primary-color !important;
+}
+
+// Font color
+.font-primary-color {
+    color: $primary-color;
+}
+
+.font-secondary-color {
+    color: $primary-color;
+}
+
+.font-white-color {
+    color: $white;
+}
+
+.font-smoke-color {
+    color: $white-smoke;
+}
