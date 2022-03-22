@@ -1,7 +1,11 @@
+@import "./reset.scss";
+
 $primary-color: #951b1b;
-$secondary-color: #202124;
+$secondary-color: #15141a;
 $white: #ffffff;
-$white-smoke: #aaaaaa;
+$white-smoke: #f8f8fc;
+$grey: #aaa;
+
 
 // Background color
 .bg-primary-color {
@@ -9,12 +13,18 @@ $white-smoke: #aaaaaa;
 }
 
 .bg-secondary-color {
-    background: $primary-color !important;
+    background: $secondary-color !important;
 }
 
+.bg-white-color {
+    background: $white;
+}
+.bg-white-smoke-color {
+    background: $white-smoke;
+}
 // Font color
 .font-primary-color {
-    color: $primary-color;
+    color: $primary-color!important;
 }
 
 .font-secondary-color {
@@ -25,6 +35,20 @@ $white-smoke: #aaaaaa;
     color: $white;
 }
 
-.font-smoke-color {
-    color: $white-smoke;
+.font-grey-color {
+    color: $grey;
 }
+
+// list style
+.list-style-none {
+    list-style: none;
+}
+
+.mg-0 {
+    margin: 0;
+}
+
+.pd-0 {
+    padding: 0;
+}
+

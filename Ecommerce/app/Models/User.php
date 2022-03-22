@@ -14,6 +14,10 @@ class User extends Authenticatable
     public $timestamps = false;
     protected $table = 'users';
 
+    public function review()
+    {
+        return $this->hasMany(Review::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -45,7 +49,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected function getFullNameAttribute(){
+    protected function getFullNameAttribute()
+    {
         return $this->attributes['first_name'] . " " . $this->attributes['last_name'];
     }
 }

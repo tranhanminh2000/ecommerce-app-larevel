@@ -59,7 +59,7 @@ const ReviewForm = ({ returnDefaultState }) => {
     };
 
     return (
-        <div className="write-review">
+        <div className="write-review shadow">
             <h3 className="title">Write a review</h3>
             <form className="form-review" onSubmit={formik.handleSubmit}>
                 <div class="form-group">
@@ -75,12 +75,12 @@ const ReviewForm = ({ returnDefaultState }) => {
                         value={formik.values.title}
                     />
                     {formik.errors.title ? (
-                        <div className="error-message">
+                        <div className="error-message  text-danger">
                             {formik.errors.title}
                         </div>
                     ) : null}
                 </div>
-                <div class="form-group">
+                <div class="form-group  mt-3">
                     <label for="detail">Detail</label>
                     <textarea
                         class="form-control"
@@ -93,13 +93,13 @@ const ReviewForm = ({ returnDefaultState }) => {
                         value={formik.values.detail}
                     />
                     {formik.errors.detail ? (
-                        <div className="error-message">
+                        <div className="error-message  text-danger">
                             {formik.errors.detail}
                         </div>
                     ) : null}
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mt-3">
                     <label for="rating">Select a rating star</label>
                     <select
                         class="form-control"
@@ -117,7 +117,7 @@ const ReviewForm = ({ returnDefaultState }) => {
 
                 {state.alert ? (
                     <div
-                        class={classNames("alert", {
+                        class={classNames("alert mt-3", {
                             "alert-danger": state.alert.status === "error",
                             "alert-success": state.alert.status === "success",
                         })}
@@ -127,7 +127,10 @@ const ReviewForm = ({ returnDefaultState }) => {
                     </div>
                 ) : null}
 
-                <button className="btn btn-primary submit-review" type="submit">
+                <button
+                    className="btn bg-primary-color text-light fw-bolder mt-3"
+                    type="submit"
+                >
                     SUBMIT REVIEW
                 </button>
             </form>

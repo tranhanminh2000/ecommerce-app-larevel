@@ -3,7 +3,6 @@ import "./dropdownMenu.scss";
 
 function DropdownMenu({ title, id, list, click }) {
     const renderListItem = (list) => {
-
         return list.map((listItem) => {
             return (
                 <li>
@@ -18,14 +17,13 @@ function DropdownMenu({ title, id, list, click }) {
                 </li>
             );
         });
-
     };
 
     return (
         <>
             <div class="dropdown">
                 <button
-                    class="btn btn-secondary dropdown-toggle"
+                    class="btn bg-primary-color text-light dropdown-toggle"
                     type="button"
                     id={id}
                     data-bs-toggle="dropdown"

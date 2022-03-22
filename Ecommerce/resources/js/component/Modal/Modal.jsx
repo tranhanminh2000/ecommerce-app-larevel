@@ -29,7 +29,7 @@ const Modal = () => {
                 </div>
                 <div class="modal-body">{modal.content}</div>
             </div>
-            <div className={"overlay"} onClick={handleHideModal}></div>
+            <div className="overlay" onClick={handleHideModal}></div>
         </div>
     );
 };

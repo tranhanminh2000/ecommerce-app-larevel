@@ -23,7 +23,7 @@ class productseeder extends Seeder
         $users = User::factory()->count(10)->create();
         $faker = Factory::create();
         $categories = Category::factory()->count(8)->create();
-        $brands = Brand::factory()->count(5)->create();
+        $brands = Brand::factory()->count(4)->create();
         foreach ($categories as $category) {
             foreach ($brands as $brand) {
                 $products = Product::factory()

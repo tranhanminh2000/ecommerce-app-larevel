@@ -11,4 +11,9 @@ class CoverPhoto extends Model
 
     public $timestamps = false;
     protected $table = 'cover_photos';
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

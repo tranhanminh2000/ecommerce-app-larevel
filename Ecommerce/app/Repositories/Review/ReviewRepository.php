@@ -6,10 +6,9 @@ use App\Models\Review;
 
 class ReviewRepository
 {
-    public function selectByCondition($sort, $filter, $bookId)
+
+    public function selectByCondition($sort, $filter, $productId)
     {
-
-
         $sortBy = null;
         $sortValue = null;
         $filterBy = null;
@@ -31,38 +30,38 @@ class ReviewRepository
 
         if (isset($sortBy)) {
             if (isset($filterBy)) {
-                return Review::findReviews($bookId)->sort($sortBy, $sortValue, $bookId)->filter($filterBy, $filterValue);
+                return Review::findReviews($productId)->sort($sortBy, $sortValue, $productId)->filter($filterBy, $filterValue)->with('user');
             }
-            return Review::findReviews($bookId)->sort($sortBy, $sortValue, $bookId);
+            return Review::findReviews($productId)->sort($sortBy, $sortValue, $productId)->with('user');
         }
     }
 
-    public function getAverageStar($bookId)
+    public function getAverageStar($productId)
     {
-        return Review::findReviews($bookId)
+        return Review::findReviews($productId)
             ->selectRaw("AVG(rating_star) as avg_rating")->get();
     }
 
-    public function getListStarClassify($bookId)
+    public function getListStarClassify($productId)
     {
-        return Review::findReviews($bookId)
+        return Review::findReviews($productId)
             ->selectRaw("rating_star, count(rating_star) as count")
             ->groupBy("rating_star")
             ->get();
     }
 
-    public function createNewReview($bookId, $reviewTitle, $reviewDetails, $ratingStar)
-    {
-        $review = new Review();
-        $review->book_id = $bookId;
-        $review->review_title = $reviewTitle;
-        $review->review_details = $reviewDetails;
-        $review->rating_star = $ratingStar;
+    // public function createNewReview($productId, $reviewTitle, $reviewDetails, $ratingStar)
+    // {
+    //     $review = new Review();
+    //     $review->product_id = $productId;
+    //     $review->review_title = $reviewTitle;
+    //     $review->review_details = $reviewDetails;
+    //     $review->rating_star = $ratingStar;
 
-        $date = date_create();
-        $review->review_date = date_format($date, 'Y-m-d H:i:s');
+    //     $date = date_create();
+    //     $review->review_date = date_format($date, 'Y-m-d H:i:s');
 
-        $review->save();
-        return $review;
-    }
+    //     $review->save();
+    //     return $review;
+    // }
 }

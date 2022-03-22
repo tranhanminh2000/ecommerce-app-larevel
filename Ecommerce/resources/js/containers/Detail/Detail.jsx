@@ -1,85 +1,49 @@
-import React, { useEffect, useState } from "react";
-import Layout from "./../../component/Layout/Layout.jsx";
+import React, { useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../actions";
-import * as types from "../../constants";
-import "./detail.scss";
-import { useDispatch, useSelector } from "react-redux";
-import classNames from "classnames";
-import ReviewSection from "../../component/ReviewSection/ReviewSection.jsx";
-import Skeleton from "react-loading-skeleton";
-import delayAsync from "./../../common/delay";
 import Loading from "../../component/Loading/Loading.jsx";
+import ReviewSection from "../../component/ReviewSection/ReviewSection.jsx";
+import * as types from "../../constants";
+import Layout from "./../../component/Layout/Layout.jsx";
+import "./detail.scss";
+import classNames from "classnames";
 
 const Detail = () => {
     let { id } = useParams();
 
-    const [alert, setAlert] = useState({
-        type: "",
-        message: "",
-    });
     const dispatch = useDispatch();
 
     const detail = useSelector((state) => state.detail);
-    const cart = useSelector((state) => state.cart);
+    console.log(detail);
+    // const cart = useSelector((state) => state.cart);
 
     useEffect(() => {
-        dispatch(actions.actionGetBookDetail(id));
+        dispatch(actions.actionGetProductDetail(id));
     }, []);
 
-    const handleAddToCart = async () => {
-        let item = {
-            id: detail.id,
-            title: detail.title,
-            author: detail.author,
-            price: detail.price,
-            discountPrice: detail.discountPrice,
-            photo: detail.photo,
-            quantity: detail.quantity,
-        };
+    // const handleAddToCart = async () => {
+    //     let item = {
+    //         id: detail.id,
+    //         title: detail.title,
+    //         author: detail.author,
+    //         price: detail.price,
+    //         discountPrice: detail.discountPrice,
+    //         photo: detail.photo,
+    //         quantity: detail.quantity,
+    //     };
 
-        if (!item.title && !item.author) {
-            return;
-        }
+    //         dispatch({
+    //             type: types.ADD_CART_ITEM_SUCCESS,
+    //             payLoad: { cartItem: item },
+    //         });
+    //         setAlert({
+    //             type: "success",
+    //             message: "Add item to cart successfully",
+    //         });
 
-        let itemExist = cart.cartList.find(
-            (cartItem) => cartItem.id === item.id
-        );
-
-        if (itemExist) {
-            if (itemExist.quantity + item.quantity > 8) {
-                setAlert({
-                    type: "error",
-                    message:
-                        "Total quantity of this book in cart is not allowed over 8 ",
-                });
-                await delayAsync(3000);
-                setAlert({ type: "", message: "" });
-            } else {
-                dispatch({
-                    type: types.ADD_CART_ITEM_SUCCESS,
-                    payLoad: { cartItem: item },
-                });
-                setAlert({
-                    type: "success",
-                    message: "Add item to cart successfully",
-                });
-                await delayAsync(3000);
-                setAlert({ type: "", message: "" });
-            }
-        } else {
-            dispatch({
-                type: types.ADD_CART_ITEM_SUCCESS,
-                payLoad: { cartItem: item },
-            });
-            setAlert({
-                type: "success",
-                message: "Add item to cart successfully",
-            });
-            await delayAsync(3000);
-            setAlert({ type: "", message: "" });
-        }
-    };
+    // };
 
     const handleIncreaseQuantity = () => {
         if (detail.quantity === 8) {
@@ -95,131 +59,138 @@ const Detail = () => {
         dispatch({ type: types.DECREASE_QUANTITY });
     };
 
+    const handleChangeActivePhoto = (img) => {
+        dispatch({
+            type: types.CHANGE_ACTIVE_PHOTO,
+            payLoad: { activePhoto: img },
+        });
+    };
+
     return (
         <Layout>
-            <div className="detail">
+            <div className="detail pt-5 pb-5">
                 <div className="container">
-                    <h1 className="title">{detail.category}</h1>
-                    <div className="section-book-detail">
+                    <div className="section-product-detail">
                         {detail.loading ? <Loading /> : null}
                         <div className="row">
-                            <div className="col-12 col-sm-8">
-                                <div className="content-detail">
+                            <div className="col-12 col-sm-12 ">
+                                <div className="content-detail shadow">
                                     <div className="row wrapper">
-                                        <div className="col-4 col-xs-4 left">
+                                        <div className="col-12 col-sm-6 left">
                                             <div className="wrapper-img">
-                                                {!detail.photo ? (
-                                                    <Skeleton
-                                                        height={"100%"}
-                                                        width={"100%"}
-                                                    />
-                                                ) : null}
-                                                {detail.photo ? (
+                                                {detail.activePhoto ? (
                                                     <img
-                                                        src={`http://127.0.0.1:8000/bookcover/${detail.photo}.jpg`}
+                                                        src={`/asset/${detail.activePhoto}.png`}
                                                         alt=""
                                                     />
                                                 ) : null}
                                             </div>
-                                            <div className="author">
-                                                {detail.author ? (
-                                                    <span className="author-name">
-                                                        'By ${detail.author}'
-                                                    </span>
-                                                ) : null}
-                                                {!detail.author ? (
-                                                    <Skeleton />
-                                                ) : null}
+                                            <div className="img-group mt-3 row">
+                                                {detail.photos.length
+                                                    ? detail.photos.map(
+                                                          (photoItem) => (
+                                                              <div className="col-4 col-md-3 ">
+                                                                  <img
+                                                                      src={`/asset/${photoItem.cover_photo_item}.png`}
+                                                                      className={classNames(
+                                                                          "border",
+                                                                          {
+                                                                              "opa-5":
+                                                                                  photoItem.cover_photo_item !=
+                                                                                  detail.activePhoto,
+                                                                          }
+                                                                      )}
+                                                                      style={{
+                                                                          width: "150px",
+                                                                          height: "100px",
+                                                                          cursor: "pointer",
+                                                                      }}
+                                                                      onClick={() =>
+                                                                          handleChangeActivePhoto(
+                                                                              photoItem.cover_photo_item
+                                                                          )
+                                                                      }
+                                                                  ></img>
+                                                              </div>
+                                                          )
+                                                      )
+                                                    : null}
                                             </div>
                                         </div>
-                                        <div className="col-8 col-xs-8 right">
-                                            <h3 className="book-name">
-                                                {detail.title
-                                                    ? detail.title
+                                        <div className="col-12 col-sm-6 right">
+                                            <h2 className="product-name">
+                                                {detail.name
+                                                    ? detail.name
                                                     : null}
-                                                {!detail.title ? (
+                                                {!detail.name ? (
                                                     <Skeleton />
                                                 ) : null}
-                                            </h3>
-                                            <p className="book-description">
-                                                {detail.summary
-                                                    ? detail.summary
+                                            </h2>
+                                            <p className="product-description">
+                                                {detail.desc
+                                                    ? detail.desc
                                                     : null}
-                                                {!detail.summary ? (
+                                                {!detail.desc ? (
                                                     <Skeleton count={5} />
                                                 ) : null}
                                             </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-12 col-sm-4">
-                                <div className="price-detail">
-                                    <div className="price">
-                                        {detail.discountPrice ? (
-                                            <>
-                                                <span
-                                                    className={classNames(
-                                                        "current",
-                                                        {
-                                                            "bwm-line-through":
-                                                                detail.discountPrice,
-                                                        }
+                                            <ul>
+                                                <li>
+                                                    Category:{" "}
+                                                    <span className="text">
+                                                        {detail.category}
+                                                    </span>
+                                                </li>
+                                                <li>Model: 3918X</li>
+                                                <li>Brand: {detail.brand}</li>
+                                                <li>
+                                                    Price:{" "}
+                                                    {detail.discount ? (
+                                                        <>
+                                                            <span className="mx-1 text-decoration-line-through">
+                                                                {detail.price}$
+                                                            </span>
+                                                            <span className="mx-1 h5 fw-bold font-primary-color">
+                                                                {
+                                                                    detail.discount
+                                                                }
+                                                                $
+                                                            </span>
+                                                        </>
+                                                    ) : (
+                                                        <span className="mx-1">
+                                                            {detail.price}$
+                                                        </span>
                                                     )}
-                                                >
-                                                    {detail.price}$
-                                                </span>
-                                                <span className="discount">
-                                                    {detail.discountPrice}$
-                                                </span>
-                                            </>
-                                        ) : (
-                                            <span className="current">
-                                                {detail.price}$
-                                            </span>
-                                        )}
-                                    </div>
+                                                </li>
+                                            </ul>
 
-                                    <div className="quantity">
-                                        <p>Quantity</p>
-                                        <div className="control">
-                                            <span
-                                                className="minus"
-                                                onClick={handleDecreaseQuantity}
-                                            >
-                                                -
-                                            </span>
-                                            <span className="number">
-                                                {detail.quantity}
-                                            </span>
-                                            <span
-                                                className="plus"
-                                                onClick={handleIncreaseQuantity}
-                                            >
-                                                +
-                                            </span>
-                                        </div>
-                                        {alert.type && alert.message ? (
-                                            <div
-                                                class={classNames("alert", {
-                                                    "alert-danger":
-                                                        alert.type === "error",
-                                                    "alert-success":
-                                                        alert.type ===
-                                                        "success",
-                                                })}
-                                                role="alert"
-                                                style={{ marginTop: "20px" }}
-                                            >
-                                                {alert.message}
+                                            <div className="control over-flow-hidden rounded">
+                                                <span
+                                                    className="minus bg-secondary-color"
+                                                    onClick={
+                                                        handleDecreaseQuantity
+                                                    }
+                                                >
+                                                    -
+                                                </span>
+                                                <span className="number">
+                                                    {detail.quantity}
+                                                </span>
+                                                <span
+                                                    className="plus bg-secondary-color"
+                                                    onClick={
+                                                        handleIncreaseQuantity
+                                                    }
+                                                >
+                                                    +
+                                                </span>
                                             </div>
-                                        ) : null}
-                                        <button
-                                            className="btn add-to-cart"
-                                            onClick={handleAddToCart}
-                                        >
-                                            Add to cart
-                                        </button>
+
+                                            <button className="btn btn-warning mt-3 fw-bold text-light">
+                                                ADD TO CART
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -22,7 +22,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'category_name' => $this->faker->unique()->randomElements(['laptop', 'mobile', 'tablet', 'headphone', 'mouse', 'keyboard', 'screen', 'speaker']),
+            'category_name' => $this->faker->unique()->randomElement(['laptop', 'mobile', 'tablet', 'headphone', 'mouse', 'keyboard', 'screen', 'speaker']),
             'category_desc' => $this->faker->text(),
         ];
     }

@@ -18,7 +18,11 @@ function Pagination(prop) {
                     onClick={() => handlePaginate(listItem)}
                 >
                     <span
-                        class="page-link"
+                        class={classNames("page-link", {
+                            "bg-primary-color": listItem.active === true,
+                            disabled: listItem.url === null,
+                        })}
+                        style={{ border: "none" }}
                         href="#"
                         tabindex="-1"
                         aria-disabled="true"

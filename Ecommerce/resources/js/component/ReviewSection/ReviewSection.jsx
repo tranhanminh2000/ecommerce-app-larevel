@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
-import "./reviewSection.scss";
 import classNames from "classnames";
+import React, { useCallback, useEffect, useState } from "react";
+import { AiFillStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../actions";
-import { AiFillStar } from "react-icons/ai";
-import Pagination from "../Pagination/Pagination.jsx";
-import ReviewForm from "./../ReviewForm/ReviewForm";
-import Loading from "../Loading/Loading";
-import DropdownMenu from "./../DropdownMenu/DropdownMenu";
 import formatDate from "../../common/formatDate";
+import Loading from "../Loading/Loading";
+import Pagination from "../Pagination/Pagination.jsx";
+import DropdownMenu from "./../DropdownMenu/DropdownMenu";
+import ReviewForm from "./../ReviewForm/ReviewForm";
+import "./reviewSection.scss";
 
 const sortList = [
     { title: "Sort by: newest to oldest", by: "review_date", value: "desc" },
@@ -36,7 +36,7 @@ function ReviewSection() {
     });
 
     useEffect(() => {
-        dispatch(actions.actionGetBookReviews(condition));
+        dispatch(actions.actionGetProductReviews(condition));
     }, [condition]);
 
     const handlePaginate = (target) => {
@@ -110,7 +110,7 @@ function ReviewSection() {
         let xhtml = [];
         xhtml = list.map((listItem) => {
             return (
-                <li className="comment-review-item">
+                <li className="comment-review-item border-bottom">
                     <h4 className="comment-review-title">
                         {listItem.review_title} !!! |{" "}
                         <span>{listItem.rating_star} star</span>
@@ -118,7 +118,16 @@ function ReviewSection() {
                     <p className="comment-review-content">
                         {listItem.review_details}
                     </p>
-                    <div className="comment-review-time">
+                    <div className="comment-review-time d-flex justify-content-between">
+                        <div>
+                            <i>
+                                By:{" "}
+                                <b>
+                                    {listItem.user.last_name +
+                                        listItem.user.first_name}
+                                </b>
+                            </i>
+                        </div>
                         {formatDate(listItem.review_date)}
                     </div>
                 </li>
@@ -142,10 +151,10 @@ function ReviewSection() {
     });
 
     return (
-        <div className="section-book-review">
+        <div className="section-product-review">
             <div className="row">
-                <div className="col-12 col-sm-8">
-                    <div className="customer-review">
+                <div className="col-12 col-sm-8 ">
+                    <div className="customer-review shadow">
                         <h3 className="title">
                             Customer reviews
                             {condition.filter === null ? null : (
@@ -171,13 +180,13 @@ function ReviewSection() {
                                 </span>
                             </div>
                         </div>
-                        <div className="utilities">
+                        <div className="utilities mt-4">
                             <p className="showing-review">
                                 Showing {review.reviewData?.from}-
                                 {review.reviewData?.to} of{" "}
                                 {review.reviewData?.total} reviews
                             </p>
-                            <div className="button-group">
+                            <div className="button-group d-flex">
                                 <DropdownMenu
                                     id="sort"
                                     title={condition.sort.title}
@@ -186,7 +195,7 @@ function ReviewSection() {
                                 />
 
                                 <button
-                                    class="btn btn-secondary dropdown-toggle show-btn"
+                                    class="btn bg-primary-color mx-3 text-light dropdown-toggle show-btn"
                                     type="button"
                                     id="show"
                                     data-bs-toggle="dropdown"
@@ -220,7 +229,7 @@ function ReviewSection() {
                         {review.loading ? <Loading /> : null}
                     </div>
                 </div>
-                <div className="col-12 col-sm-4">
+                <div className="col-12 col-sm-4 ">
                     <ReviewForm returnDefaultState={returnDefaultState} />
                 </div>
             </div>

@@ -24,7 +24,7 @@ class CouponFactory extends Factory
     {
         return [
             'coupon_amount' => $this->faker->randomElement([20, 30, 40, 50]),
-            'active' => $this->faker->randomFloat([true, false]),
+            'active' => $this->faker->randomElement([true, false]),
         ];
     }
 }

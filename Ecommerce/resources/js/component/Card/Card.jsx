@@ -3,39 +3,49 @@ import { Link } from "react-router-dom";
 import "./card.scss";
 
 function Card({ item }) {
-    const img =
-        item.book_cover_photo !== null ? item.book_cover_photo : "bookDefault";
-
     return (
         <Link
-            to={"/detail/" + item.id}
-            className="card bwm-card"
-            style={{ width: "100%" }}
-            title={item.book_title}
+            to="/"
+            class="card rounded-0"
+            style={{ height: "400px", overflow: "hidden" }}
         >
-            <div className="wrapper-img">
-                <img src={`/bookcover/${img}.jpg`} />
+            <div className="wrapper-img" style={{ height: "230px" }}>
+                <img
+                    src={`/asset/${item.cover_photo[0].cover_photo_item}.png`}
+                    class="card-img-top rounded-0"
+                    alt="..."
+                    style={{
+                        height: "100%",
+                        width: "100%",
+                        objectFit: "contain",
+                    }}
+                />
             </div>
-            <div className="card-body">
-                <div className="card-body-head">
-                    <h5 className="card-title">{item.book_title}</h5>
-                    <p className="card-text">{item.author_name}</p>
-                </div>
-                <div className="card-body-foot">
-                    <div className="price">
-                        {item.discount_price ? (
-                            <>
-                                <span className="current bwm-line-through">
-                                    {item.book_price}$
-                                </span>
-                                <span className="discount">
-                                    {item.discount_price}$
-                                </span>
-                            </>
-                        ) : (
-                            <span className="current">{item.book_price}$</span>
-                        )}
-                    </div>
+            <div class="card-body d-flex flex-column justify-content-between">
+                <p class="card-text mb-2" style={{ height: "40px" }}>
+                    {item.product_name}
+                </p>
+                <div class="card-price">
+                    {item.discount_price ? (
+                        <>
+                            <div className="font-primary-color fw-bold">
+                                {item.discount_price}$
+                            </div>
+                            <div
+                                className="font-grey-color text-decoration-line-through"
+                                style={{ fontSize: "0.9rem" }}
+                            >
+                                {item.product_price}$
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className="font-primary-color fw-bold">
+                                {item.product_price}$
+                            </div>
+                            <div style={{ height: "1.4rem" }}></div>
+                        </>
+                    )}
                 </div>
             </div>
         </Link>

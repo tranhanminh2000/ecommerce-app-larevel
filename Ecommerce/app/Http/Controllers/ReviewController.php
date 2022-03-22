@@ -3,40 +3,36 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Review;
 use App\Repositories\Review\ReviewRepository;
 use App\Support\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class ReviewController extends Controller
 {
+    public ReviewRepository $reviewRepository;
+
+    public function __construct(ReviewRepository $reviewRepository)
+    {
+        $this->reviewRepository = $reviewRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public ReviewRepository $reviewRepository;
-
-    public function __construct(reviewRepository $reviewRepository)
-    {
-        $this->reviewRepository = $reviewRepository;
-    }
-
-
     public function index(Request $request)
     {
         $size = $request->query('size');
         $sort = $request->query('sort');
         $filter = $request->query('filter');
-        $bookId = $request->query('bookId');
+        $productId = $request->query('productId');
 
-        $reviews = $this->reviewRepository->selectByCondition($sort, $filter, $bookId)->get()->unique();
+        $reviews = $this->reviewRepository->selectByCondition($sort, $filter, $productId)->get()->unique();
 
         $result = (new Collection($reviews))->paginate($size);
-        $avgStar = $this->reviewRepository->getAverageStar($bookId);
-        $listStarClassify = $this->reviewRepository->getListStarClassify($bookId);
+        $avgStar = $this->reviewRepository->getAverageStar($productId);
+        $listStarClassify = $this->reviewRepository->getListStarClassify($productId);
 
         return response()->json([
             "success" => true,
@@ -66,34 +62,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-
-        $validator = Validator::make($request->all(), [
-            'bookId' => 'required',
-            'reviewTitle' => 'required',
-            'ratingStar' => 'required',
-        ]);
-
-        // Check validation failure
-        if ($validator->fails()) {
-            $result = response()->json([
-                "success" => false,
-                "message" => $validator->getMessageBag(),
-            ], 404);
-
-            return $result;
-        }
-
-        $bookId = $request->bookId;
-        $reviewTile = $request->reviewTitle;
-        $reviewDetails = $request->reviewDetails;
-        $ratingStar = $request->ratingStar;
-
-        $result = $this->reviewRepository->createNewReview($bookId, $reviewTile, $reviewDetails, $ratingStar);
-
-        return  response()->json([
-            "success" => true,
-            "newReview" => $result,
-        ], 200);;
+        //
     }
 
     /**
@@ -104,6 +73,7 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
+        return $this->productRepository->getProductById($id);
     }
 
     /**

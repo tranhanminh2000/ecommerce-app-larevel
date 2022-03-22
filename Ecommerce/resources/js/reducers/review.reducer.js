@@ -29,20 +29,20 @@ const generateListStar = (list = []) => {
 const generateTotal = (list = []) => {
     let total = 0;
 
-    total = list.reduce((accumulator, current)=>{
-        return accumulator + current.count
-    }, total)
+    total = list.reduce((accumulator, current) => {
+        return accumulator + current.count;
+    }, total);
 
     return total;
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case types.GET_BOOK_REVIEWS_REQUEST:
+        case types.GET_PRODUCT_REVIEWS_REQUEST:
             return { ...state, loading: true };
-        case types.GET_BOOK_REVIEWS_SUCCESS:
+        case types.GET_PRODUCT_REVIEWS_SUCCESS:
             const { avg_star, listStarClassify, reviewsData } =
-            action.payLoad.review;
+                action.payLoad.review;
             const review = {
                 avgStar: avg_star ? parseFloat(avg_star).toFixed(1) : 0,
                 listStarClassify: generateListStar(listStarClassify),
@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
             };
 
             return { ...state, ...review, loading: false };
-        case types.GET_BOOK_REVIEWS_FAILED:
+        case types.GET_PRODUCT_REVIEWS_FAILED:
             return { ...state, loading: false };
         default:
             return state;

@@ -1,72 +1,54 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { BiSearchAlt } from "react-icons/bi";
 import "./header.scss";
-import * as actions from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useMatch } from "react-router-dom";
-import classNames from "classnames";
 import { NAV_LINK_LIST } from "../../constants/navLink.constant";
-import LoginForm from "../LoginForm/LoginForm";
+import classNames from "classnames";
+import { Link, useMatch } from "react-router-dom";
 
 const Header = () => {
-    const dispatch = useDispatch();
-    const cart = useSelector((state) => state.cart);
-    const auth = useSelector((state) => state.auth);
-
-    const handleShowLogin = () => {
-        dispatch(actions.showModal());
-        dispatch(actions.changeModalTitle("Login"));
-        dispatch(actions.changeModalContent(<LoginForm />));
-    };
-
-    const checkCurrentUser = () => {
-        dispatch(actions.actCheckCurrentUser());
-    };
-
-    useEffect(() => {
-        checkCurrentUser();
-    }, [auth.authenticating]);
-
-    const navListItem = ({ label, to, activeOnlyWhen, icon }) => {
-        const match = useMatch({
+    function MenuItemLink({ label, to, activeOnlyWhenExact }) {
+        let match = useMatch({
             path: to,
-            exact: activeOnlyWhen,
+            exact: activeOnlyWhenExact,
         });
 
         return (
-            <li className="nav-item">
+            <li>
                 <Link
+                    className={classNames("font-grey-color", {
+                        "font-primary-color": match,
+                        "fw-bold": match,
+                    })}
                     to={to}
-                    className={classNames("nav-link", { active: match })}
-                    aria-current="page"
                 >
-                    {icon}
-                    {label === "Cart" ? `${label}(${cart.cartNumber})` : label}
+                    {label}
                 </Link>
             </li>
         );
-    };
+    }
 
-    const renderNavListItem = (navLinks) => {
+    const renderMenuLink = (list) => {
         let xhtml = [];
-        xhtml = navLinks.map((link) => {
-            const { label, path, exact, icon } = link;
-
-            return navListItem({
-                label: label,
-                to: path,
-                activeOnlyWhen: exact,
-                icon: icon,
-            });
+        xhtml = list.map((listItem) => {
+            return (
+                <MenuItemLink
+                    label={listItem.label}
+                    to={listItem.path}
+                    activeOnlyWhenExact={true}
+                />
+            );
         });
-
         return xhtml;
     };
-
-    const handleLogout = () => {
-        dispatch(actions.actUserLogout());
-    };
     return (
-        <div className="bwm-header">
+        <>
+            <div class="d-flex justify-content-center bd-darkLight bg-primary-color">
+                <div class="p-2 bd-highlight text-light">
+                    Contact: 1900-6099
+                </div>
+                <div class="p-2 bd-highlight text-light">Fax: 18899888</div>
+                <div class="p-2 bd-highlight text-light">News</div>
+            </div>
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container">
                     <button
@@ -85,55 +67,36 @@ const Header = () => {
                         className="collapse navbar-collapse"
                         id="navbarSupportedContent"
                     >
-                        <Link to="/home" className="navbar-brand logo" href="#">
+                        <div to="/home" className="navbar-brand logo" href="#">
                             <div className="image-wrapper">
                                 <img
-                                    src={"/bookcover/bookworm_icon.svg"}
+                                    src={"/logo.png"}
                                     alt=""
                                     className="d-inline-block align-text-top"
                                 />
                             </div>
-                        </Link>
-                        <ul className="navbar-nav mb-2 mb-lg-0">
-                            {renderNavListItem(NAV_LINK_LIST)}
+                        </div>
+                        <form class="d-flex">
+                            <input
+                                class="form-control me-2 search-input"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                            />
+                            <button
+                                class="btn bg-primary-color text-light"
+                                type="submit"
+                            >
+                                <BiSearchAlt />
+                            </button>
+                        </form>
+                        <ul className="navbar-nav mb-2 mb-lg-0  navigation">
+                            {renderMenuLink(NAV_LINK_LIST)}
                         </ul>
-
-                        {auth.user ? (
-                            <div className="loggedIn">
-                                Hello, {auth.user.fullName}{" "}
-                                <div class="dropdown">
-                                    <button
-                                        class="btn btn-secondary dropdown-toggle"
-                                        type="button"
-                                        id="userConfig"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false"
-                                    ></button>
-                                    <ul
-                                        class="dropdown-menu"
-                                        aria-labelledby="userConfig"
-                                    >
-                                        <li>
-                                            <div
-                                                class="dropdown-item"
-                                                onClick={handleLogout}
-                                            >
-                                                Log Out
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        ) : null}
-                        {!auth.user ? (
-                            <div className="logIn" onClick={handleShowLogin}>
-                                Log In
-                            </div>
-                        ) : null}
                     </div>
                 </div>
             </nav>
-        </div>
+        </>
     );
 };
 

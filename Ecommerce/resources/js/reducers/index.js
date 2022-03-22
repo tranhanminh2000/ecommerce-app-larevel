@@ -1,20 +1,12 @@
 import { combineReducers } from "redux";
-import modal from "./modal.reducer";
-import detail from "./detail.reducer";
-import review from "./review.reducer";
-import shopFilter from "./shopFilter.reducer";
-import shopProduct from "./shopProduct.reducer";
-import cart from "./cart.reducer";
-import auth from "./auth.reducer";
+import home from "./home.reducer.js";
+import detail from "./detail.reducer.js";
+import review from "./review.reducer.js";
 
 const rootReducer = combineReducers({
-    modal,
-    detail,
     review,
-    shopFilter,
-    shopProduct,
-    cart,
-    auth,
+    detail,
+    home,
 });
 
 export default rootReducer;

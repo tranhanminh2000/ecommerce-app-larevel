@@ -2,49 +2,50 @@ import * as types from "../constants";
 
 const initialState = {
     id: null,
-    title: "",
-    summary: "",
+    name: "",
+    desc: "",
+    brand: null,
+    category: "",
     price: "",
-    discountPrice: null,
-    photo: "",
-    author: null,
-    category: null,
+    discount: null,
+    photos: [],
+    activePhoto: null,
     quantity: 1,
     loading: false,
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case types.GET_BOOK_DETAIL_REQUEST:
+        case types.GET_PRODUCT_DETAIL_REQUEST:
             return { ...state, loading: true };
-        case types.GET_BOOK_DETAIL_SUCCESS:
+        case types.GET_PRODUCT_DETAIL_SUCCESS:
             const {
                 id,
-                book_title,
-                book_summary,
-                book_price,
-                book_cover_photo,
-                discount,
-                author,
+                product_name,
+                product_desc,
+                product_price,
+                brand,
                 category,
+                discount,
+                cover_photo,
             } = action.payLoad.detail;
-            const bookDetail = {
+            const productDetail = {
                 id: id,
-                title: book_title,
-                summary: book_summary,
-                price: book_price,
-                discountPrice: discount === null ? null : discount.discount_price,
-                photo:
-                    book_cover_photo !== null
-                        ? book_cover_photo
-                        : "bookDefault",
-                author: author.author_name,
+                name: product_name,
+                desc: product_desc,
+                brand: brand.brand_name,
                 category: category.category_name,
+                price: product_price,
+                discount: discount ? discount.discount_price : null,
+                photos: cover_photo,
+                activePhoto: cover_photo[0].cover_photo_item,
             };
-            return { ...state, ...bookDetail, loading: false };
-        case types.GET_BOOK_DETAIL_FAILED:
+            return { ...state, ...productDetail, loading: false };
+        case types.GET_PRODUCT_DETAIL_FAILED:
             return { ...state, loading: false };
-
+        case types.CHANGE_ACTIVE_PHOTO:
+            const { activePhoto } = action.payLoad;
+            return { ...state, activePhoto: activePhoto, loading: false };
         case types.INCREASE_QUANTITY:
             return { ...state, quantity: state.quantity + 1 };
 

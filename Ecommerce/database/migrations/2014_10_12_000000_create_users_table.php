@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('email',70)->unique();
             $table->string('password');
             $table->boolean('admin')->default(false);
-            $table->boolean('user_cover_photo')->default(null);
+            $table->boolean('user_cover_photo')->default(null)->nullable();
         });
     }
 
@@ -32,6 +32,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('users');
     }
 }

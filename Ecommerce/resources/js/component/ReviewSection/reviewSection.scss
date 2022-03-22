@@ -1,6 +1,4 @@
-@import "../../scss/_variables.scss";
-
-.section-book-review {
+.section-product-review {
     margin-top: 20px;
     .row {
         .col-12.col-sm-8 {
@@ -8,8 +6,6 @@
                 position: relative;
                 background: white;
                 padding: 20px;
-                box-shadow: $box-shadow;
-                border-radius: $border-radius;
                 .title {
                     font-weight: 600;
                     .sub-title {
@@ -37,7 +33,6 @@
                             cursor: pointer;
                             &.active {
                                 text-decoration: underline;
-                                color: $secondary-color;
                                 font-weight: bold;
                             }
                         }
@@ -64,21 +59,20 @@
                     padding: 0;
 
                     .comment-review-item {
-                        border-bottom: 1px solid $primary-color;
                         margin-bottom: 20px;
                         .comment-review-title {
                             font-weight: 600;
-                            span{
+                            span {
                                 font-size: 1.2rem;
                                 font-weight: 500;
                             }
                         }
                         .comment-review-content {
-                            border-left: 5px solid $secondary-color;
-                            padding-left: 20px;
                             text-transform: capitalize;
                             text-indent: 30px;
                             line-height: 2;
+                            text-align: justify;
+                            text-justify: inter-word;
                         }
                         .comment-review-time {
                             display: flex;
@@ -94,9 +88,7 @@
         .col-12.col-sm-4 {
             .write-review {
                 background: white;
-                border-radius: $border-radius;
                 padding: 20px;
-                box-shadow: $box-shadow;
 
                 .title {
                 }

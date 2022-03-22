@@ -8,7 +8,9 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Models\Book;
+use App\Models\Product;
 use App\Repositories\Book\BookRepository;
 /*
 |--------------------------------------------------------------------------
@@ -23,30 +25,7 @@ use App\Repositories\Book\BookRepository;
 
 
 // Auth and generate token
-Route::post('v1/login', [AuthController::class, "login"]);
-Route::post('v1/register', [AuthController::class, "register"]);
-
-Route::get("v1/books/mostDiscount", [BookController::class, 'getMostDiscount']);
-Route::get("v1/books/recommended", [BookController::class, 'getRecommended']);
-Route::get("v1/books/popular", [BookController::class, 'getPopular']);
-Route::resource("v1/books", BookController::class);
-
-Route::resource("v1/reviews", ReviewController::class);
-
-Route::get("v1/categories", [CategoryController::class, 'getCategoriesName']);
-Route::get("v1/authors", [AuthorController::class, 'getAuthorsName']);
-
-Route::post("v1/reviews", [ReviewController::class, "store"]);
 
 
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('v1/user', function (Request $request) {
-        $user = $request->user();
-        $user['full_name'] = $user->full_name;
-
-        return $user;
-    });
-    Route::post('v1/logout', [AuthController::class, "logout"]);
-    Route::post("v1/orders", [OrderController::class, "store"]);
-});
-
+Route::resource("v1/product", ProductController::class);
+Route::resource("v1/review", ReviewController::class);

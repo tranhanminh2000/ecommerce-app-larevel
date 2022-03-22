@@ -1,116 +1,67 @@
-@import "../../scss/_variables.scss";
-
 .detail {
     .container {
         .title {
             padding: 10px 0 10px;
+            text-transform: capitalize;
         }
-        .section-book-detail {
+        .section-product-detail {
             position: relative;
             .row {
-                .col-12.col-sm-8 {
+                .col-12.col-sm-12 {
                     .content-detail {
                         background: white;
                         padding: 20px;
-                        box-shadow: $box-shadow;
-                        border-radius: $border-radius;
                         overflow: hidden;
                         .row.wrapper {
-                            .col-4.left {
+                            .left {
                                 .wrapper-img {
                                     width: 100%;
                                     height: 300px;
                                     overflow: hidden;
-                                    border-radius: $border-radius;
                                     img {
                                         width: 100%;
                                         height: 100%;
                                     }
                                 }
+                            }
+                            .right {
+                                .product-name {
+                                    text-transform: capitalize;
+                                }
+                                .product-description {
+                                    color: gray;
+                                }
 
-                                .author {
-                                    .author-name {
-                                        display: inline-block;
-                                        font-weight: bold;
-                                        float: right;
+                                .control {
+                                    border: 1px solid grey;
+                                    width: 100px;
+                                    overflow: hidden;
+                                    display: flex;
+                                    align-items: center;
+                                    text-transform: uppercase;
+                                    justify-content: space-between;
+                                    color: white;
+                                    font-size: 20px;
+                                    font-weight: 700;
+                                    .minus {
+                                        display: block;
+                                        cursor: pointer;
+                                        width: 30px;
+                                        text-align: center;
+                                        font-size: 25px;
+                                    }
+                                    .number {
+                                        color: black;
+                                    }
+                                    .plus {
+                                        display: block;
+                                        cursor: pointer;
+                                        width: 30px;
+                                        margin-right: -2px;
+                                        text-align: center;
+                                        font-size: 25px;
                                     }
                                 }
-                            }
-                            .col-8.right {
-                                .book-name {
-                                }
-                                .book-description {
-                                }
-                            }
-                        }
-                    }
-                }
-                .col-12.col-sm-4 {
-                    .price-detail {
-                        overflow: hidden;
-                        background: white;
-                        border-radius: $border-radius;
-                        box-shadow: $box-shadow;
-                        .price {
-                            background: $primary-color;
-                            padding: 10px;
-                            .discount {
-                                font-size: 20px;
-                                font-weight: bold;
-                                color: white;
-                            }
-                            .current {
-                                margin-right: 10px;
-                                color: white;
-                            }
-                        }
-                        .quantity {
-                            padding: 20px;
-                            p {
-                                color: $secondary-color;
-                                font-size: 16px;
-                                font-weight: bold;
-                            }
-                            .control {
-                                margin: auto;
-                                border-radius: $border-radius;
-                                overflow: hidden;
-                                display: flex;
-                                justify-content: space-between;
-                                align-items: center;
-                                text-transform: uppercase;
-                                color: white;
-                                font-size: 20px;
-                                font-weight: 700;
-                                box-shadow: $box-shadow;
-                                .minus {
-                                    display: block;
-                                    background: $secondary-color;
-                                    cursor: pointer;
-                                    width: 20%;
-                                    text-align: center;
-                                    font-size: 25px;
-                                }
-                                .number {
-                                    color: black;
-                                }
-                                .plus {
-                                    display: block;
-                                    background: $secondary-color;
-                                    cursor: pointer;
-                                    width: 20%;
-                                    text-align: center;
-                                    font-size: 25px;
-                                }
-                            }
-                            .add-to-cart {
-                                display: block;
-                                margin: auto;
-                                width: 100%;
-                                margin-top: 20px;
-                                text-transform: uppercase;
-                                color: white;
-                                background: $primary-color;
                             }
                         }
                     }
@@ -118,4 +69,8 @@
             }
         }
     }
+}
+
+.opa-5 {
+    opacity: 0.5;
 }

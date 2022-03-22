@@ -4,3 +4,4 @@ export * from "./navLink.constant";
 export * from "./shop.constant";
 export * from "./cart.constant";
 export * from "./auth.constant";
+export * from "./home.constant";

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Product\ProductInterface;
+use App\Repositories\Product\ProductRepository;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
@@ -15,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
